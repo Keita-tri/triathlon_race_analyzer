@@ -3,7 +3,7 @@ import metricsRegistry from '../config/metricsRegistry.json';
 
 export const loadData = async () => {
   try {
-    const response = await fetch('/data.csv');
+    const response = await fetch(`${import.meta.env.BASE_URL}data.csv`);
     const dataText = await response.text();
 
     const dataResult = Papa.parse(dataText, { header: true, dynamicTyping: true, skipEmptyLines: true });
@@ -12,7 +12,8 @@ export const loadData = async () => {
       data: dataResult.data,
       definitions: processDefinitions(metricsRegistry, dataResult.meta.fields)
     };
-  } catch (error) {
+  } catch (error)
+ {
     console.error('Error loading data:', error);
     return { data: [], definitions: [] };
   }
