@@ -4,7 +4,7 @@ set -e
 # 既存のdistディレクトリを削除
 rm -rf dist
 
-# ビルド (npm run buildが 'cp data.csv public/data.csv && vite build' を実行)
+# ビルド
 npm run build
 
 # distディレクトリに移動
