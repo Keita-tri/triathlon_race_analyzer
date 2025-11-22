@@ -1,0 +1,68 @@
+カテゴリ,ID,カラム名,日本語指標名,指標説明,判断基準,ラベル,統計計算方法
+基本,1,event_id,イベントID,データを管理するシステム番号。,システム管理用です。,-,-
+基本,2,prog_id,プログラムID,種目ごとの管理番号。,システム管理用です。,-,-
+基本,3,event_class,大会クラス,大会のグレード（WCなど）。,大会の格付けを確認します。,-,-
+基本,4,event_title,大会名,大会の正式名称。,大会を特定します。,-,-
+基本,5,event_venue,開催地,都市名。,場所による傾向（暑い、坂が多い等）を見ます。,-,-
+基本,6,event_country,国,開催国。,移動距離や時差の考慮に使います。,-,-
+基本,7,event_date,開催日,レースが行われた日付。,季節や時期を確認します。,-,-
+基本,8,race_year,開催年,オリンピック選考の年度。,選考サイクルのどの時期かを確認します。,-,-
+基本,9,starters_count,スタート人数,スタートラインに立った選手の総数。,多いほど接触トラブル等のリスクが増します。,Depends,Count(All)
+基本,10,finishers_count,完走者数,制限時間内にゴールできた選手の数。,多いほどレース環境が安定していたと言えます。,Positive,Count(FIN)
+基本,11,dnf_count,リタイア人数,途中棄権した選手の数。,多いほど、過酷な気象条件や難コースだったことを示します。,Negative,Start - Finish
+基本,12,finish_rate_pct,完走率,スタートした選手が完走できた割合。,70%未満なら、完走するだけでも価値があるサバイバルレースです。,Positive,Finish / Start
+ルール,13,scorers_count,ポイント獲得数,ポイントが付与された選手の人数。,多いほど、多くの選手にチャンスがあった大会です。,Positive,Count(IN CO)
+ルール,14,scoring_success_rate_pct,完走者ポイント獲得率,完走者のうち、ポイントが取れた割合。,低い(60%以下)場合、完走しても徒労に終わるリスクが高い激戦です。,Positive,獲得 / 完走
+ルール,15,last_scoring_pos,ポイント圏内ラスト順位,ポイントを獲得できた最も低い順位。,50位以上なら「穴場」、30位以下なら「激戦」です。,Positive,MAX(Pos)
+ルール,16,zero_point_finishers,死のゾーン完走者数,完走したのにポイント0だった人数。,多いほど、トップが速すぎてレース全体が破壊されたことを示します。,Negative,Count(OUT CO)
+ルール,17,gap_1st_3rd_sec,表彰台タイム差,1位と3位のゴールのタイム差。,小さいほど、ゴール直前までもつれる接戦でした。,Negative,3rd - 1st
+ルール,18,gap_1st_10th_sec,エリート層密度,1位と10位のゴールのタイム差。,小さいほど、少しのミスで順位が大きく落ちるハイレベルな戦いです。,Negative,10th - 1st
+ルール,19,gap_1st_30th_sec,Top30フィールド密度,1位と30位のゴールのタイム差。,小さいほど、参加者全員のレベルが高く、縦に伸びない高速レースです。,Negative,30th - 1st
+ルール,20,gap_10th_30th_sec,Top10-Top30断絶度,10位と30位の間のタイム差。,大きい場合、Top10のエリート集団だけが別次元のレースをしています。,Positive,30th - 10th
+ルール,21,gap_1st_last_scorer_sec,ポイント圏内タイム差,1位と、ポイント獲得最下位のタイム差。,この時間内にゴールすればポイントがもらえる、という目安になります。,Positive,Last - 1st
+バイク,22,bike_pack1_size,第1パック人数,バイク終了時に先頭集団にいた人数。,10人以下なら「逃げ」、30人以上なら「大集団」でのラン勝負です。,Depends,Count(pack=1)
+バイク,23,winner_from_pack1_flag,優勝者は第1パックか,優勝者がバイク先頭集団にいたかどうか。,1なら先頭集団必須、0なら後方から逆転優勝できたレースです。,Positive,Winner pack=1
+バイク,24,top10_pack1_ratio_pct,Top10の第1パック率,Top10選手のうち、バイク先頭集団だった割合。,80%以上なら、第1パックに乗れないと入賞は絶望的です。,Positive,Top10内Pack1率
+バイク,25,scorers_pack1_ratio_pct,ポイント圏の第1パック率,ポイント獲得者のうち、バイク先頭集団だった割合。,数値が低ければ、バイクで千切れてもポイント獲得のチャンスはあります。,Negative,獲得者内Pack1率
+バイク,26,bike_expansion_ratio,集団伸縮率,バイクでタイム差が広がった倍率。,1.0より大きいと、バイクで実力差が出てバラバラになった展開です。,Positive,Bike変 / Swim変
+バイク,27,bike_front_pack_retention,T2先頭の前残り数,バイク後順位がTop10のままゴールした人数。,多いほどランでの逆転が難しく、バイク順位がそのまま結果になります。,Positive,B10位→F10位
+バイク,28,bike_solo_breakaway,単独逃げフラグ,バイク終了時、2位に15秒差をつけた選手がいたか。,1なら、誰かが集団から飛び出して単独でバイクを終えました。,Positive,2nd-1st > 15s
+スイム,29,swim_winner_deficit,優勝者のスイム負債,優勝者がスイムトップから遅れていた秒数。,0秒なら先行逃げ切り、30秒以上なら追い上げ勝ちです。,Positive,Winner Swim diff
+スイム,30,swim_avg_pos_top10,Top10スイム平均,Top10に入った選手の平均スイム順位。,5位など数字が小さいほど、泳げないと勝負にならないレースです。,Negative,Top10 S平均
+スイム,31,swim_avg_pos_top30,Top30スイム平均,Top30に入った選手の平均スイム順位。,30位など数字が大きいほど、泳げなくても挽回可能です。,Positive,Top30 S平均
+スイム,32,swim_avg_pos_scorers,ポイント圏スイム平均,ポイント獲得者の平均スイム順位。,数字が大きいなら、スイムが苦手でもポイント獲得のチャンス大です。,Positive,獲得者 S平均
+スイム,33,swim_weak_survivors_top30,スイム出遅れTop30数,スイム30位以下からTop30まで挽回した人数。,人数が多いほど、スイムが苦手な選手に希望があるコースです。,Positive,S>30 & F<=30
+スイム,34,swim_weak_scorers_count,スイム出遅れポイント数,スイム30位以下からポイントを獲得した人数。,ここが0人だと、泳げない選手は参加するだけ無駄です。,Positive,S>30 & IN CO
+スイム,35,swim_leader_survival_rate,スイム先行組生存率,スイムTop10選手がTop30に残った割合。,高いほど、先行逃げ切りが有利なレースです。,Positive,(S10&F30)/S10
+スイム,36,swim_front_survivors,スイム前方生存数,トップ15秒以内で上がり、Top30に入った人数。,この数が多いレースは、スタートダッシュが絶対条件です。,Positive,S<=15s & F<=30
+スイム,37,swim_dispersion_top30,スイム集団バラつき,スイム終了時のタイム差の標準偏差。,大きいほど、個々の泳力差がタイムにはっきり出ました。,Positive,Top30 S標準偏差
+バイク,38,bike_off_dispersion_top30,T2入口・Top30分散,上位陣のバイク終了タイムのバラつき。,数字が大きいほど、サバイバルな展開で個々の力が試されました。,Positive,Top30 B標準偏差
+バイク,39,bike_off_dispersion_scorers,T2入口・ポイント圏分散,全体のバイク終了タイムのバラつき。,ポイント圏内の選手たちがどのような状態でランに移ったかがわかります。,Positive,獲得者 B標準偏差
+バイク,40,bike_gap_1st_10th,逃げの貯金,バイク終了時の1位と10位の秒差。,この秒数が大きいほど、後続のランナーは追いつくのが難しくなります。,Positive,B 10th - 1st
+バイク,41,bike_gap_1st_30th,集団の縦長度,バイク終了時の1位と30位の秒差。,小さいと団子状態でランスタート。トランジションの早さが重要です。,Negative,B 30th - 1st
+バイク,42,bike_move_up_count_top30,バイクごぼう抜き(Top30),バイクで順位を10以上上げてTop30に入った人数。,スイムで出遅れても、バイク力があれば挽回できるコースです。,Positive,S-B>10 & F<=30
+バイク,43,bike_move_up_count_scorers,バイクごぼう抜き(全体),バイクで順位を10以上上げてポイントを取った人数。,バイクが得意な選手に有利なコースです。,Positive,S-B>10 & IN CO
+ラン,44,run_dominance_top10,ランナー支配力,ランTop10の選手が総合Top10に入った数。,10に近いほど、小細工なしの「走力勝負」だったことを示します。,Positive,R<=10 & F<=10
+ラン,45,run_positions_gained_top10,Top10ごぼう抜き平均,総合Top10選手がランで抜いた平均人数。,プラスが大きいほど、上位入賞には強烈なランが必要です。,Positive,Avg(B-F) Top10
+ラン,46,run_positions_gained_top30,Top30ごぼう抜き平均,総合Top30選手がランで抜いた平均人数。,プラスが大きいほど、ランでの逆転劇が多く起きています。,Positive,Avg(B-F) Top30
+ラン,47,run_positions_gained_scorers,ポイント圏ごぼう抜き平均,ポイント獲得者がランで抜いた平均人数。,下位層がランでどれだけ粘った（追い上げた）かがわかります。,Positive,Avg(B-F) Scorers
+ラン,48,run_slowest_rank_top30,Top30最遅ラン順位,Top30に入った中で一番遅かったラン順位。,50位など数字が大きいなら、バイクまでの貯金があれば逃げ切れます。,Positive,MAX(R) in Top30
+ラン,49,run_slowest_rank_scorers,ポイント圏最遅ラン順位,ポイント獲得者の中で一番遅かったラン順位。,30位など数字が小さいなら、ランが遅い選手は容赦なく圏外です。,Positive,MAX(R) in Scorers
+ラン,50,run_gap_1st_10th,ラン走力の密度,ラン1位と10位のタイム差。,小さいなら全員同じくらい速く、ミスが許されません。,Negative,R 10th - 1st
+ラン,51,run_dominance_sec,ラン独走タイム差,ラン1位と2位のタイム差。,この秒数が大きいほど、トップ選手の走力が突出しています。,Positive,R 2nd - 1st
+ラン,52,run_winner_rank,優勝者のラン順位,優勝者のランラップ順位。,1位なら走力勝ち。1位以外ならバイクでのリードを守り切った展開勝ちです。,Negative,Winner Run Rank
+ラン,53,run_fastest_deficit,最速ランナーの敗因,ラン1位が負けた時のバイク終了時点のタイム差。,この秒数が「ラン最速でも逆転不可能なライン」です。,Positive,R1位のBikeトップ差
+ラン,54,run_time_volatility_top30,Run Volatility Score,Top30選手のランタイムの標準偏差。,小さい場合、全員が同じようなペースで走っており順位変動が起きにくいです。,Negative,Top30 R標準偏差
+ランク,55,rank_winner,優勝者ランク,優勝者の世界ランキング。,数値が大きいほど「まさかあの選手が！？」という大金星です。,Positive,Winner Rank
+ランク,56,rank_avg_top3,Top3平均ランク,Top3選手の平均ランキング。,数値が小さいほど、本命選手たちが順当に表彰台を独占しました。,Negative,Top3 Avg
+ランク,57,rank_avg_top10,Top10平均ランク,Top10選手の平均ランキング。,数値が小さいほど、強豪選手がひしめくハイレベルな大会でした。,Negative,Top10 Avg
+ランク,58,rank_avg_top30,Top30平均ランク,Top30選手の平均ランキング。,数値が大きいほど、選手層が薄く、中堅選手にもチャンスがある「穴場」です。,Positive,Top30 Avg
+ランク,59,rank_avg_scorers,ポイント圏平均ランク,ポイント獲得者の平均ランキング。,数値が大きい（例: 80位）なら、ランキングが低くてもチャンス大です。,Positive,Scorers Avg
+ランク,60,rank_upset_count_top30,Top30下克上数,格上を倒してTop30に入った人数。,多いほど、実力通りの結果にならない波乱の展開でした。,Positive,Count(F<Rank)
+ランク,61,rank_upset_count_scorers,全体下克上数,ポイント圏全体での番狂わせ数。,多いほど、レース全体がカオスな結果になりました。,Positive,Count(F<Rank)
+ランク,62,rank_correlation,順位通りの決着度,ランキングと順位の相関係数。,1.0に近いほど、事前のランキング通りに順位が決まりました。,Positive,Correlation
+ランク,63,rank_volatility_top10,Top10ランク偏差,Top10選手のランクの標準偏差。,大きい場合、ランク1位とランク50位などが混ざってTop10に入っています。,Positive,Top10 Rank StdDev
+ランク,64,rank_volatility_scorers,ポイント圏ランク偏差,ポイント獲得者のランクの標準偏差。,大きい場合、上位と下位が入り乱れた混戦でした。,Positive,Scorers Rank StdDev
+ランク,65,rank_overperformers_top20,Top20期待値超え数,ランクより良い順位でTop20に入った人数。,多い場合、若手やノーマーク選手の活躍が目立ちました。,Positive,F < Rank in Top20
+ランク,66,rank_winner_is_top_ranked,本命優勝フラグ,ランク1位の選手が勝ったか。,1なら本命の順当勝ち、0なら敗北です。,Positive,Winner = TopRanked
+ランク,67,rank_podium_is_top_ranked,本命表彰台数,ランク上位3名が表彰台に乗った人数。,3なら完全順当、0なら総崩れです。,Positive,Count match

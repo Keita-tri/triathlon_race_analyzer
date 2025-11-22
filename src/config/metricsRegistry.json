@@ -1,0 +1,850 @@
+[
+    {
+        "id": "event_id",
+        "label": "イベントID",
+        "category": "基本",
+        "description": "データを管理するシステム番号。",
+        "judgment": "システム管理用です。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "prog_id",
+        "label": "プログラムID",
+        "category": "基本",
+        "description": "種目ごとの管理番号。",
+        "judgment": "システム管理用です。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "prog_name",
+        "label": "プログラム名",
+        "category": "基本",
+        "description": "Elite MenかElite Woemenを選びます。",
+        "judgment": "男子レースを分析対象とするか、女子レースを分析対象にするか決めます。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "",
+        "presets": [],
+        "filterable": true,
+        "filterType": "multiselect",
+        "displayType": "text"
+    },
+    {
+        "id": "event_class",
+        "label": "大会クラス",
+        "category": "基本",
+        "description": "大会のグレード（WCなど）。",
+        "judgment": "大会の格付けを確認します。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "",
+        "presets": [],
+        "filterable": true,
+        "filterType": "multiselect",
+        "displayType": "text"
+    },
+    {
+        "id": "event_title",
+        "label": "大会名",
+        "category": "基本",
+        "description": "大会の正式名称。",
+        "judgment": "大会を特定します。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "",
+        "presets": [
+            "beginner",
+            "swim",
+            "bike",
+            "run",
+            "points"
+        ]
+    },
+    {
+        "id": "event_venue",
+        "label": "開催地",
+        "category": "基本",
+        "description": "都市名。",
+        "judgment": "場所による傾向（暑い、坂が多い等）を見ます。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "event_country",
+        "label": "国",
+        "category": "基本",
+        "description": "開催国。",
+        "judgment": "移動距離や時差の考慮に使います。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "event_date",
+        "label": "開催日",
+        "category": "基本",
+        "description": "レースが行われた日付。",
+        "judgment": "季節や時期を確認します。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "race_year",
+        "label": "開催年",
+        "category": "基本",
+        "description": "大会開催年。",
+        "judgment": "選考サイクルのどの時期かを確認します。",
+        "rule": "-",
+        "calculation": "-",
+        "unit": "年",
+        "presets": [],
+        "filterable": true,
+        "filterType": "multiselect",
+        "displayType": "number"
+    },
+    {
+        "id": "starters_count",
+        "label": "スタート人数",
+        "category": "基本",
+        "description": "スタートラインに立った選手の総数。",
+        "judgment": "多いほど接触トラブル等のリスクが増します。",
+        "rule": "Depends",
+        "calculation": "Count(All)",
+        "unit": "人",
+        "presets": [
+            "beginner"
+        ]
+    },
+    {
+        "id": "finishers_count",
+        "label": "完走者数",
+        "category": "基本",
+        "description": "LAP/DNFなどではなく、ゴールできた選手の数。",
+        "judgment": "多いほどレース環境が安定していたと言えます。",
+        "rule": "Positive",
+        "calculation": "Count(FIN)",
+        "unit": "人",
+        "presets": [
+            "beginner"
+        ]
+    },
+    {
+        "id": "dnf_count",
+        "label": "リタイア人数",
+        "category": "基本",
+        "description": "途中棄権した選手の数。",
+        "judgment": "多いほど、過酷な気象条件や難コースだったことを示します。",
+        "rule": "Negative",
+        "calculation": "Start - Finish",
+        "unit": "人",
+        "presets": [
+            "beginner"
+        ]
+    },
+    {
+        "id": "finish_rate_pct",
+        "label": "完走率",
+        "category": "基本",
+        "description": "スタートした選手が完走できた割合。",
+        "judgment": "70%未満なら、完走するだけでも価値があるサバイバルレースです。",
+        "rule": "Positive",
+        "calculation": "Finish / Start",
+        "unit": "%",
+        "presets": [
+            "beginner"
+        ]
+    },
+    {
+        "id": "scorers_count",
+        "label": "ポイント獲得数",
+        "category": "全体",
+        "description": "ポイントが付与された選手の人数。",
+        "judgment": "多いほど、多くの選手にチャンスがあった大会です。",
+        "rule": "Positive",
+        "calculation": "Count(IN CO)",
+        "unit": "人",
+        "presets": [
+            "points"
+        ]
+    },
+    {
+        "id": "scoring_success_rate_pct",
+        "label": "完走者ポイント獲得率",
+        "category": "全体",
+        "description": "完走者のうち、ポイントが取れた割合。",
+        "judgment": "低い(60%以下)場合、完走しても徒労に終わるリスクが高い激戦です。",
+        "rule": "Positive",
+        "calculation": "獲得 / 完走",
+        "unit": "%",
+        "presets": [
+            "points"
+        ]
+    },
+    {
+        "id": "last_scoring_pos",
+        "label": "Cut Off タイムラスト順位",
+        "category": "全体",
+        "description": "ポイントを獲得できた最も低い順位。",
+        "judgment": "50位以上なら「穴場」、30位以下なら「激戦」です。",
+        "rule": "Positive",
+        "calculation": "MAX(Pos)",
+        "unit": "位",
+        "presets": [
+            "points"
+        ]
+    },
+    {
+        "id": "zero_point_finishers",
+        "label": "死のゾーン完走者数",
+        "category": "全体",
+        "description": "完走したのにポイント0だった人数。",
+        "judgment": "多いほど、トップが速すぎてレース全体が破壊されたことを示します。",
+        "rule": "Negative",
+        "calculation": "Count(OUT CO)",
+        "unit": "人",
+        "presets": [
+            "points"
+        ]
+    },
+    {
+        "id": "gap_1st_3rd_sec",
+        "label": "表彰台タイム差",
+        "category": "全体",
+        "description": "1位と3位のゴールのタイム差。",
+        "judgment": "小さいほど、ゴール直前までもつれる接戦でした。",
+        "rule": "Negative",
+        "calculation": "3rd - 1st",
+        "unit": "秒",
+        "presets": []
+    },
+    {
+        "id": "gap_1st_10th_sec",
+        "label": "エリート層Top10の密度",
+        "category": "全体",
+        "description": "1位と10位のゴールのタイム差。",
+        "judgment": "小さいほど、少しのミスで順位が大きく落ちるハイレベルな戦いです。",
+        "rule": "Negative",
+        "calculation": "10th - 1st",
+        "unit": "秒",
+        "presets": []
+    },
+    {
+        "id": "gap_1st_30th_sec",
+        "label": "Top30選手の密度",
+        "category": "全体",
+        "description": "1位と30位のゴールのタイム差。",
+        "judgment": "小さいほど、参加者全員のレベルが高く、縦に伸びない高速レースです。",
+        "rule": "Negative",
+        "calculation": "30th - 1st",
+        "unit": "秒",
+        "presets": []
+    },
+    {
+        "id": "gap_10th_30th_sec",
+        "label": "Top10-Top30断絶度",
+        "category": "全体",
+        "description": "10位と30位の間のタイム差。",
+        "judgment": "大きい場合、Top10のエリート集団だけが別次元のレースをしています。",
+        "rule": "Positive",
+        "calculation": "30th - 10th",
+        "unit": "秒",
+        "presets": []
+    },
+    {
+        "id": "gap_1st_last_scorer_sec",
+        "label": "ポイント圏内タイム差",
+        "category": "全体",
+        "description": "1位と、ポイント獲得最下位のタイム差。",
+        "judgment": "この時間内にゴールすればポイントがもらえる、という目安になります。",
+        "rule": "Positive",
+        "calculation": "Last - 1st",
+        "unit": "秒",
+        "presets": [
+            "points"
+        ]
+    },
+    {
+        "id": "bike_pack1_size",
+        "label": "第1パック人数",
+        "category": "Bike",
+        "description": "Bike終了時に先頭集団にいた人数。",
+        "judgment": "10人以下なら「少人数ラン展開」、30人以上なら「大集団」でのRun勝負です。",
+        "rule": "Depends",
+        "calculation": "Count(pack=1)",
+        "unit": "人",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "winner_from_pack1_flag",
+        "label": "優勝者は第1パックか",
+        "category": "Bike",
+        "description": "優勝者がBike先頭集団にいたかどうか。",
+        "judgment": "1なら先頭集団必須、0なら後方から逆転優勝できたレースです。",
+        "rule": "Positive",
+        "calculation": "Winner pack=1",
+        "unit": "Flag",
+        "presets": [
+            "bike"
+        ],
+        "displayType": "flag"
+    },
+    {
+        "id": "top10_pack1_ratio_pct",
+        "label": "Top10の第1パック率",
+        "category": "Bike",
+        "description": "Top10選手のうち、Bike先頭集団だった割合。",
+        "judgment": "80%以上なら、第1パックに乗れないとTop10入りは絶望的です。",
+        "rule": "Positive",
+        "calculation": "Top10内Pack1率",
+        "unit": "%",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "scorers_pack1_ratio_pct",
+        "label": "ポイント圏内第1パック率",
+        "category": "Bike",
+        "description": "ポイント獲得者のうち、Bike先頭集団だった割合。",
+        "judgment": "数値が低ければ、Bikeで千切れてもポイント獲得のチャンスはあります。",
+        "rule": "Negative",
+        "calculation": "獲得者内Pack1率",
+        "unit": "%",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "bike_expansion_ratio",
+        "label": "集団伸縮率",
+        "category": "Bike",
+        "description": "Swim後に、Bikeでタイム差が広がった倍率。",
+        "judgment": "1.0より大きいと、Bikeで実力差が出てバラバラになった展開です。",
+        "rule": "Positive",
+        "calculation": "Bike変 / Swim変",
+        "unit": "",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "bike_solo_breakaway",
+        "label": "単独逃げフラグ",
+        "category": "Bike",
+        "description": "Bike終了時、2位に15秒差をつけた選手がいたか。",
+        "judgment": "1なら、誰かが集団から飛び出して単独でBikeを終えました。",
+        "rule": "Positive",
+        "calculation": "2nd-1st > 15s",
+        "unit": "",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "swim_winner_deficit",
+        "label": "優勝者のSwim負債",
+        "category": "Swim",
+        "description": "優勝者がSwimトップから遅れていた秒数。",
+        "judgment": "0秒なら先行逃げ切り、30秒以上なら追い上げ勝ちです。",
+        "rule": "Positive",
+        "calculation": "Winner Swim diff",
+        "unit": "秒",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "swim_avg_pos_top10",
+        "label": "総合Top10のSwim順位平均",
+        "category": "Swim",
+        "description": "Top10に入った選手の平均Swim順位。",
+        "judgment": "スイマーの活躍度合いです。5位など数字が小さいほど、泳げないと勝負になりません。",
+        "rule": "Negative",
+        "calculation": "Top10 S平均",
+        "unit": "位",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "swim_avg_pos_top30",
+        "label": "総合Top30Swim順位平均",
+        "category": "Swim",
+        "description": "Top30に入った選手の平均Swim順位。",
+        "judgment": "30位など数字が大きいほど、泳げなくても挽回可能です。",
+        "rule": "Positive",
+        "calculation": "Top30 S平均",
+        "unit": "位",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "swim_avg_pos_scorers",
+        "label": "ポイント圏Swim平均",
+        "category": "Swim",
+        "description": "ポイント獲得者の平均Swim順位。",
+        "judgment": "数字が大きいなら、Swimが苦手でもポイント獲得のチャンス大です。",
+        "rule": "Positive",
+        "calculation": "獲得者 S平均",
+        "unit": "位",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "swim_weak_survivors_top30",
+        "label": "Swim出遅れ総合Top30数",
+        "category": "Swim",
+        "description": "Swim30位以下からTop30まで挽回した人数。",
+        "judgment": "人数が多いほど、Swimが苦手な選手に希望があるレースです。",
+        "rule": "Positive",
+        "calculation": "S>30 & F<=30",
+        "unit": "人",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "swim_weak_scorers_count",
+        "label": "Swim出遅れポイント数",
+        "category": "Swim",
+        "description": "Swim30位以下からポイントを獲得した人数。",
+        "judgment": "ここが0人だと、泳げない選手は参加するだけ無駄です。",
+        "rule": "Positive",
+        "calculation": "S>30 & IN CO",
+        "unit": "人",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "swim_leader_survival_rate",
+        "label": "Swim先行組生存率",
+        "category": "Swim",
+        "description": "SwimのTop10選手が総合Top30に残った割合。",
+        "judgment": "高いほど、スイマーの先行逃げ切りが有利なレースです。",
+        "rule": "Positive",
+        "calculation": "(S10&F30)/S10",
+        "unit": "%",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "swim_front_survivors",
+        "label": "Swim前方生存数",
+        "category": "Swim",
+        "description": "トップ15秒以内で上がり、Top30に入った人数。",
+        "judgment": "この数が多いレースは、スタートダッシュが絶対条件です。",
+        "rule": "Positive",
+        "calculation": "S<=15s & F<=30",
+        "unit": "人",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "swim_dispersion_top30",
+        "label": "Swim集団バラつき",
+        "category": "Swim",
+        "description": "Swim終了時のタイム差の標準偏差。",
+        "judgment": "大きいほど、個々の泳力差がタイムにはっきり出ました。",
+        "rule": "Positive",
+        "calculation": "Top30 S標準偏差",
+        "unit": "秒",
+        "presets": [
+            "swim"
+        ]
+    },
+    {
+        "id": "bike_off_dispersion_top30",
+        "label": "T2入口・Top30分散",
+        "category": "Bike",
+        "description": "上位陣のBike終了タイムのバラつき。",
+        "judgment": "数字が大きいほど、サバイバルな展開で個々の力が試されました。",
+        "rule": "Positive",
+        "calculation": "Top30 B標準偏差",
+        "unit": "秒",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "bike_off_dispersion_scorers",
+        "label": "T2入口・ポイント圏分散",
+        "category": "Bike",
+        "description": "全体のBike終了タイムのバラつき。",
+        "judgment": "大きいほどポイント圏内の選手たちがばらばらの状態でRunに移りました。",
+        "rule": "Positive",
+        "calculation": "獲得者 B標準偏差",
+        "unit": "秒",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "bike_gap_1st_10th",
+        "label": "逃げの貯金",
+        "category": "Bike",
+        "description": "Bike終了時の1位と10位の秒差。",
+        "judgment": "この秒数が大きいほど、後続のランナーは追いつくのが難しくなります。",
+        "rule": "Positive",
+        "calculation": "B 10th - 1st",
+        "unit": "秒",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "bike_gap_1st_30th",
+        "label": "集団の縦長度",
+        "category": "Bike",
+        "description": "Bike終了時の1位と30位の秒差。",
+        "judgment": "小さいと団子状態でRunスタート。トRunジションの早さが重要です。",
+        "rule": "Negative",
+        "calculation": "B 30th - 1st",
+        "unit": "秒",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "bike_move_up_count_top30",
+        "label": "Bikeごぼう抜き(Top30)",
+        "category": "Bike",
+        "description": "Bike終了時まで順位を10以上上げてTop30に入った人数。",
+        "judgment": "Swimで出遅れても、Bike力があれば挽回できるコースです。(T2に向けた位置取りでノイズになる可能性があります。)",
+        "rule": "Positive",
+        "calculation": "S-B>10 & F<=30",
+        "unit": "人",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "bike_move_up_count_scorers",
+        "label": "Bikeごぼう抜き(全体)",
+        "category": "Bike",
+        "description": "Bikeで順位を10以上上げてポイントを取った人数。",
+        "judgment": "Bikeが得意な選手に有利なコースです。(T2に向けた位置取りでノイズになる可能性があります。)",
+        "rule": "Positive",
+        "calculation": "S-B>10 & IN CO",
+        "unit": "人",
+        "presets": [
+            "bike"
+        ]
+    },
+    {
+        "id": "run_dominance_top10",
+        "label": "ランナー支配力",
+        "category": "Run",
+        "description": "RunTop10の選手が総合Top10に入った数。",
+        "judgment": "10に近いほど、小細工なしの「走力勝負」だったことを示します。",
+        "rule": "Positive",
+        "calculation": "R<=10 & F<=10",
+        "unit": "人",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_positions_gained_top10",
+        "label": "Top10ごぼう抜き平均",
+        "category": "Run",
+        "description": "総合Top10選手がRunで抜いた平均人数。",
+        "judgment": "プラスが大きいほど、上位入賞には強烈なRunが必要です。",
+        "rule": "Positive",
+        "calculation": "Avg(B-F) Top10",
+        "unit": "人",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_positions_gained_top30",
+        "label": "Top30ごぼう抜き平均",
+        "category": "Run",
+        "description": "総合Top30選手がRunで抜いた平均人数。",
+        "judgment": "プラスが大きいほど、Runでの逆転劇が多く起きています。",
+        "rule": "Positive",
+        "calculation": "Avg(B-F) Top30",
+        "unit": "人",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_positions_gained_scorers",
+        "label": "ポイント圏ごぼう抜き平均",
+        "category": "Run",
+        "description": "ポイント獲得者がRunで抜いた平均人数。",
+        "judgment": "下位層がRunでどれだけ粘った（追い上げた）かがわかります。",
+        "rule": "Positive",
+        "calculation": "Avg(B-F) Scorers",
+        "unit": "人",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_slowest_rank_top30",
+        "label": "Top30最遅Run順位",
+        "category": "Run",
+        "description": "Top30に入った中で一番遅かったRun順位。",
+        "judgment": "50位など数字が大きいなら、Bikeまでの貯金があれば逃げ切れます。",
+        "rule": "Positive",
+        "calculation": "MAX(R) in Top30",
+        "unit": "位",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_slowest_rank_scorers",
+        "label": "ポイント圏最遅Run順位",
+        "category": "Run",
+        "description": "ポイント獲得者の中で一番遅かったRun順位。",
+        "judgment": "30位など数字が小さいなら、Runが遅い選手は容赦なく圏外です。",
+        "rule": "Positive",
+        "calculation": "MAX(R) in Scorers",
+        "unit": "位",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_gap_1st_10th",
+        "label": "Run走力の密度",
+        "category": "Run",
+        "description": "Run1位と10位のタイム差。",
+        "judgment": "小さいなら全員同じくらい速く、ミスが許されません。",
+        "rule": "Negative",
+        "calculation": "R 10th - 1st",
+        "unit": "秒",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_dominance_sec",
+        "label": "Run独走タイム差",
+        "category": "Run",
+        "description": "Run1位と2位のタイム差。",
+        "judgment": "この秒数が大きいほど、トップ選手の走力が突出しています。",
+        "rule": "Positive",
+        "calculation": "R 2nd - 1st",
+        "unit": "秒",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_winner_rank",
+        "label": "優勝者のRun順位",
+        "category": "Run",
+        "description": "優勝者のRunラップ順位。",
+        "judgment": "1位なら走力勝ち。1位以外ならBikeまででのリードを守り切った展開勝ちです。",
+        "rule": "Negative",
+        "calculation": "Winner Run Rank",
+        "unit": "位",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_fastest_deficit",
+        "label": "最速ランナーの敗因",
+        "category": "Run",
+        "description": "Run1位が負けた時のBike終了時点のタイム差。",
+        "judgment": "この秒数が「Run最速でも逆転不可能なライン」です。",
+        "rule": "Positive",
+        "calculation": "R1位のBikeトップ差",
+        "unit": "秒",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "run_time_volatility_top30",
+        "label": "Runタイムのばらつき",
+        "category": "Run",
+        "description": "Top30選手のRunタイムの標準偏差。",
+        "judgment": "小さい場合、全員が同じようなペースで走っており順位変動が起きにくいです。",
+        "rule": "Negative",
+        "calculation": "Top30 R標準偏差",
+        "unit": "秒",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "bike_front_pack_retention",
+        "label": "ラン逆転の難しさ",
+        "category": "Run",
+        "description": "Bike後の順位がTop10のままTop10でゴールした人数。",
+        "judgment": "多いほどRunでの逆転が難しく、Bike順位がそのまま結果になります。",
+        "rule": "Positive",
+        "calculation": "B10位→F10位",
+        "unit": "人",
+        "presets": [
+            "run"
+        ]
+    },
+    {
+        "id": "rank_winner",
+        "label": "優勝者Rank",
+        "category": "Rank",
+        "description": "優勝者の世界ランキング。",
+        "judgment": "数値が大きいほど「まさかあの選手が！？」という大金星です。",
+        "rule": "Positive",
+        "calculation": "Winner Rank",
+        "unit": "位",
+        "presets": []
+    },
+    {
+        "id": "rank_avg_top3",
+        "label": "Top3平均Rank",
+        "category": "Rank",
+        "description": "Top3選手の平均ランキング。",
+        "judgment": "数値が小さいほど、Top3ランクの選手たちが順当に表彰台を独占しました。",
+        "rule": "Negative",
+        "calculation": "Top3 Avg",
+        "unit": "位",
+        "presets": []
+    },
+    {
+        "id": "rank_avg_top10",
+        "label": "Top10平均Rank",
+        "category": "Rank",
+        "description": "Top10選手の平均ランキング。",
+        "judgment": "数値が小さいほど、強豪選手がひしめくハイレベルな大会でした。",
+        "rule": "Negative",
+        "calculation": "Top10 Avg",
+        "unit": "位",
+        "presets": []
+    },
+    {
+        "id": "rank_avg_top30",
+        "label": "Top30平均Rank",
+        "category": "Rank",
+        "description": "Top30選手の平均ランキング。",
+        "judgment": "数値が大きいほど、選手層が薄く、中堅選手にもチャンスがある「穴場」です。",
+        "rule": "Positive",
+        "calculation": "Top30 Avg",
+        "unit": "位",
+        "presets": []
+    },
+    {
+        "id": "rank_avg_scorers",
+        "label": "ポイント圏内平均Rank",
+        "category": "Rank",
+        "description": "ポイント獲得者の平均ランキング。",
+        "judgment": "数値が大きい（例: 80位）なら、ランキングが低くてもチャンス大です。",
+        "rule": "Positive",
+        "calculation": "Scorers Avg",
+        "unit": "位",
+        "presets": []
+    },
+    {
+        "id": "rank_upset_count_top30",
+        "label": "Top30選手の下克上数",
+        "category": "Rank",
+        "description": "スタートナンバー(ランキング)の格上を倒してTop30に入った人数。",
+        "judgment": "Top30の番狂わせ。多いほど、実力通りの結果にならない波乱の展開でした。",
+        "rule": "Positive",
+        "calculation": "Count(F<Rank)",
+        "unit": "人",
+        "presets": []
+    },
+    {
+        "id": "rank_upset_count_scorers",
+        "label": "レース全体の全体下克上数",
+        "category": "Rank",
+        "description": "Cut Offタイム内でゴールした選手のうち、スタートナンバー(ランキング)と順位の番狂わせ数。",
+        "judgment": "レース全体の番狂わせ。多いほど、レース全体がカオスな結果になりました。",
+        "rule": "Positive",
+        "calculation": "Count(F<Rank)",
+        "unit": "人",
+        "presets": []
+    },
+    {
+        "id": "rank_correlation",
+        "label": "順位通りの決着度",
+        "category": "Rank",
+        "description": "Runキングと順位の相関係数。",
+        "judgment": "1.0に近いほど、事前のRunキング通りに順位が決まりました。",
+        "rule": "Positive",
+        "calculation": "Correlation",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "rank_volatility_top10",
+        "label": "Top10選手のRankばらつき",
+        "category": "Rank",
+        "description": "Top10選手のRankの標準偏差。",
+        "judgment": "大きい場合、Rank1位とRan100位などが混ざってTop10に入っています。",
+        "rule": "Positive",
+        "calculation": "Top10 Rank StdDev",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "rank_volatility_scorers",
+        "label": "ポイント圏内選手のRankばらつき",
+        "category": "Rank",
+        "description": "ポイント獲得者のRankの標準偏差。",
+        "judgment": "大きい場合、上位と下位が入り乱れた混戦でした。",
+        "rule": "Positive",
+        "calculation": "Scorers Rank StdDev",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "rank_overperformers_top20",
+        "label": "Top20期待値超え数",
+        "category": "Rank",
+        "description": "自分のスタートナンバー(ランキング)より良い順位でTop20に入った人数。",
+        "judgment": "多い場合、若手やノーマーク選手の活躍が目立ちました。",
+        "rule": "Positive",
+        "calculation": "F < Rank in Top20",
+        "unit": "人",
+        "presets": []
+    },
+    {
+        "id": "rank_winner_is_top_ranked",
+        "label": "本命優勝フラグ",
+        "category": "Rank",
+        "description": "Rank1位の選手が勝ったか。",
+        "judgment": "1なら本命の順当勝ち、0なら敗北です。",
+        "rule": "Positive",
+        "calculation": "Winner = TopRanked",
+        "unit": "",
+        "presets": []
+    },
+    {
+        "id": "rank_podium_is_top_ranked",
+        "label": "本命表彰台数",
+        "category": "Rank",
+        "description": "Rank上位3名が表彰台に乗った人数。",
+        "judgment": "3なら完全順当、0なら総崩れです。",
+        "rule": "Positive",
+        "calculation": "Count match",
+        "unit": "人",
+        "presets": []
+    }
+]
